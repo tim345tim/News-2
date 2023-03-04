@@ -1,0 +1,18 @@
+  body {
+    background-color: #f8f8ff;
+  }
+  
+  .centered {
+      padding-top: 200px;
+      text-align: center;
+      background-color: #f8f8ff;
+  }
+
+  .left {
+    padding-top: 25px;
+    background-color: #f8f8ff;
+}
+
+.btn {
+  margin-right: 10px;
+}
