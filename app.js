@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
+const fixieData = process.env.FIXIE_SOCKS_HOST.split(new RegExp('[/(:\\/@/]+'));
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
@@ -28,7 +29,22 @@ app.use(passport.session());
 
 const uri = process.env.MONGODB_URI;
 
-mongoose.connect(uri);
+// mongoose.connect(uri);
+
+mongoose.connect(uri,
+    {
+      proxyUsername: fixieData[0],
+      proxyPassword: fixieData[1],
+      proxyHost: fixieData[2],
+      proxyPort: fixieData[3]
+     },
+    (error) => {
+      if(error){
+        console.log(error);
+      }
+      console.log('Connected to database');
+    }
+);
 
 const userSchema = new mongoose.Schema ({
     email: String,
